@@ -1,4 +1,3 @@
-
 use serde_yaml::Value;
 use std::collections::HashMap;
 
@@ -57,3 +56,4 @@ pub fn markdown_to_html(markdown_input: &str) -> String {
 
     html_output
 }
+

@@ -37,3 +37,4 @@ pub fn render_files(files: Vec<MarkdownFile>) -> Vec<String> {
 
     rendered_files
 }
+

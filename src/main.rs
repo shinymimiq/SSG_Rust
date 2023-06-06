@@ -6,7 +6,7 @@ mod markdown;
 mod templating;
 
 use file_io::{read_markdown_files, write_files};
-use markdown::{parse_markdown_file};
+use markdown::parse_markdown_file;
 use templating::render_files;
 
 fn main() {
@@ -30,3 +30,4 @@ pub struct MarkdownFile {
     metadata: HashMap<String, Value>,
     content: String,
 }
+

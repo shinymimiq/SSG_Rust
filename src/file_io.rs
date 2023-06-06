@@ -5,9 +5,7 @@ use crate::MarkdownFile;
 use serde_yaml::Value;
 use std::io::Read;
 
-// mod markdown;
 use crate::parse_markdown_file;
-// use markdown::{parse_metadata, parse_markdown_file, markdown_to_html};
 
 /// Writes a vector of HTML strings to files with names based on the "title" metadata in the corresponding MarkdownFile.
 ///
@@ -45,7 +43,7 @@ pub fn read_markdown_files(directory: &str) -> Vec<MarkdownFile> {
                 file.read_to_string(&mut text).expect("Failed to read file");
                 let (metadata, content) = parse_markdown_file(&text);
                 files.push(MarkdownFile{
-                    metadata: metadata,
+                    metadata,
                     content: content.to_string(),
                 });
             },
@@ -55,5 +53,4 @@ pub fn read_markdown_files(directory: &str) -> Vec<MarkdownFile> {
 
     files
 }
-
 
