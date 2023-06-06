@@ -2,8 +2,8 @@ use std::fs::File;
 use std::io::Write;
 use glob::glob;
 use crate::MarkdownFile;
-// use serde_yaml::Value;
 use std::io::Read;
+use log::debug;
 
 use crate::parse_markdown_file;
 
@@ -17,6 +17,7 @@ pub fn write_files(files: Vec<String>, markdown_files: &Vec<MarkdownFile>) {
     for (file, markdown_file) in files.into_iter().zip(markdown_files) {
         if !markdown_file.title.is_empty() {
             let file_name = format!("output/{}.html", markdown_file.title);  // Adjust the directory to your needs
+            debug!("Writing file: {}", file_name);
             let mut output_file = File::create(file_name).expect("Failed to create file");
             output_file.write_all(file.as_bytes()).expect("Failed to write to file");
         }
@@ -38,6 +39,7 @@ pub fn read_markdown_files(directory: &str) -> Vec<MarkdownFile> {
     for entry in glob(&format!("{}/*.md", directory)).expect("Failed to read glob pattern") {
         match entry {
             Ok(path) => {
+                debug!("Reading file: {:?}", path);
                 let mut file: File = File::open(path).expect("Failed to open file");
                 let mut text: String = String::new();
                 file.read_to_string(&mut text).expect("Failed to read file");

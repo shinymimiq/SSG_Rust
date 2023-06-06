@@ -9,9 +9,19 @@ use file_io::{read_markdown_files, write_files};
 use markdown::parse_markdown_file;
 use templating::render_files;
 
-fn main() {
-    let markdown_files = read_markdown_files("markdown_files");
+// logger
+use log::{info, debug};
+// use log::{info, warn, error, debug, trace};
 
+fn main() {
+    //setup logger
+    env_logger::init();
+
+    info!("Starting up");
+
+    debug!("Reading markdown files");
+    let markdown_files = read_markdown_files("markdown_files");
+    debug!("Parsing markdown files");
     let rendered_files = render_files(markdown_files.clone());
 
     // At this point, rendered_files is a Vec<String>, where each String is the HTML content of a page.
@@ -20,8 +30,10 @@ fn main() {
         println!("{}", file);
     }
 
+    debug!("Writing files");
     write_files(rendered_files, &markdown_files);
 }
+
 
 #[derive(Clone)]
 pub struct MarkdownFile {
