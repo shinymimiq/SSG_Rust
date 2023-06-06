@@ -37,7 +37,7 @@ pub fn parse_markdown_file(content: &str) -> MarkdownFile {
         Some(Value::String(title)) => title.clone(),
         _ => String::new(),
     };
-    
+
     let author = match metadata_map.get("author") {
         Some(Value::String(author)) => author.clone(),
         _ => String::new(),
@@ -47,12 +47,12 @@ pub fn parse_markdown_file(content: &str) -> MarkdownFile {
         Some(Value::String(datetime)) => datetime.clone(),
         _ => String::new(),
     };
-    
+
     let tags: Vec<String> = match metadata_map.get("tags") {
         Some(Value::Sequence(tags)) => tags.iter().map(|v| v.as_str().unwrap_or("").to_string()).collect(),
         _ => Vec::new(),
     };
-    
+
     let categories: Vec<String> = match metadata_map.get("categories") {
         Some(Value::Sequence(categories)) => categories.iter().map(|v| v.as_str().unwrap_or("").to_string()).collect(),
         _ => Vec::new(),
