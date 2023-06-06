@@ -19,9 +19,7 @@ fn main() {
 
     info!("Starting up");
 
-    debug!("Reading markdown files");
     let markdown_files = read_markdown_files("markdown_files");
-    debug!("Parsing markdown files");
     let rendered_files = render_files(markdown_files.clone());
 
     // At this point, rendered_files is a Vec<String>, where each String is the HTML content of a page.

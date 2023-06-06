@@ -39,7 +39,7 @@ pub fn read_markdown_files(directory: &str) -> Vec<MarkdownFile> {
     for entry in glob(&format!("{}/*.md", directory)).expect("Failed to read glob pattern") {
         match entry {
             Ok(path) => {
-                debug!("Reading file: {:?}", path);
+                debug!("Reading markdown file: {:?}", path);
                 let mut file: File = File::open(path).expect("Failed to open file");
                 let mut text: String = String::new();
                 file.read_to_string(&mut text).expect("Failed to read file");

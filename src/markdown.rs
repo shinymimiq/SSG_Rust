@@ -2,6 +2,8 @@ use serde_yaml::Value;
 use std::collections::HashMap;
 use crate::MarkdownFile;
 
+use log::{info, debug};
+
 /// Parses the metadata from a string and returns a HashMap of key-value pairs.
 ///
 /// # Arguments
@@ -26,6 +28,7 @@ pub fn parse_metadata(metadata: &str) -> HashMap<String, Value> {
 ///
 /// A tuple containing a HashMap of key-value pairs from the metadata and a string of HTML content.
 pub fn parse_markdown_file(content: &str) -> MarkdownFile {
+    debug!("Parsing markdown file");
     let split: Vec<&str> = content.splitn(3, "---").collect();
     let metadata: &&str = split.get(1).unwrap_or(&"");
     let content: &&str = split.get(2).unwrap_or(&"");
