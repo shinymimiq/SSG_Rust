@@ -9,6 +9,12 @@ use std::io::Read;
 use crate::parse_markdown_file;
 // use markdown::{parse_metadata, parse_markdown_file, markdown_to_html};
 
+/// Writes a vector of HTML strings to files with names based on the "title" metadata in the corresponding MarkdownFile.
+///
+/// # Arguments
+///
+/// * `files` - A vector of HTML strings to write to files.
+/// * `markdown_files` - A vector of MarkdownFile structs containing metadata and content.
 pub fn write_files(files: Vec<String>, markdown_files: &Vec<MarkdownFile>) {
     for (file, markdown_file) in files.into_iter().zip(markdown_files) {
         if let Value::String(title) = markdown_file.metadata.get("title").unwrap() {
@@ -19,6 +25,15 @@ pub fn write_files(files: Vec<String>, markdown_files: &Vec<MarkdownFile>) {
     }
 }
 
+/// Reads all Markdown files in a directory and returns a vector of MarkdownFile structs containing metadata and content.
+///
+/// # Arguments
+///
+/// * `directory` - A string containing the path to the directory containing the Markdown files.
+///
+/// # Returns
+///
+/// A vector of MarkdownFile structs containing metadata and content.
 pub fn read_markdown_files(directory: &str) -> Vec<MarkdownFile> {
     let mut files: Vec<MarkdownFile> = Vec::new();
 

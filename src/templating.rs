@@ -2,6 +2,15 @@ use tera::{Context, Tera};
 use crate::MarkdownFile;
 use serde_yaml::Value;
 
+/// Renders a vector of Markdown files using Tera templates and returns a vector of rendered HTML strings.
+///
+/// # Arguments
+///
+/// * `files` - A vector of MarkdownFile structs containing metadata and content.
+///
+/// # Returns
+///
+/// A vector of rendered HTML strings.
 pub fn render_files(files: Vec<MarkdownFile>) -> Vec<String> {
     let tera: Tera = match Tera::new("templates/**/*") {
         Ok(t) => t,
