@@ -23,11 +23,13 @@ fn main() {
     write_files(rendered_files, &markdown_files);
 }
 
-use std::collections::HashMap;
-use serde_yaml::Value;
 #[derive(Clone)]
 pub struct MarkdownFile {
-    metadata: HashMap<String, Value>,
+    title: String,
+    author: String,
+    datetime: String,
+    tags: Vec<String>,
+    categories: Vec<String>,
     content: String,
 }
 

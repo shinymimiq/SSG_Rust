@@ -1,6 +1,5 @@
 use tera::{Context, Tera};
 use crate::MarkdownFile;
-use serde_yaml::Value;
 
 /// Renders a vector of Markdown files using Tera templates and returns a vector of rendered HTML strings.
 ///
@@ -24,16 +23,18 @@ pub fn render_files(files: Vec<MarkdownFile>) -> Vec<String> {
 
     for file in files {
         let mut context: Context = Context::new();
-        if let Value::String(title) = file.metadata.get("title").unwrap() {
-            context.insert("title", title);
-        }
+        context.insert("title", &file.title);
+        context.insert("author", &file.author);
+        context.insert("datetime", &file.datetime);
+        context.insert("tags", &file.tags);
+        context.insert("categories", &file.categories);
         context.insert("content", &file.content);
 
         match tera.render("post.html", &context) {
             Ok(rendered) => rendered_files.push(rendered),
             Err(e) => println!("Rendering error: {}", e),
-        };
-    }
+    };
+}
 
     rendered_files
 }
