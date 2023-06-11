@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article>
+    <!-- ... -->
+    <p>This is customised template</p>
+    {{ content | safe }}
+</article>
+{% endblock content %}
